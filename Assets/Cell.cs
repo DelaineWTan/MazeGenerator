@@ -25,7 +25,8 @@ public class Cell : MonoBehaviour
         GameObject wallObject = GetWall(direction);
         if (wallObject != null)
         {
-            Destroy(wallObject); // Destroy the wall GameObject.
+            wallObject.SetActive(false);
+            //Destroy(wallObject); // Destroy the wall GameObject.
         }
     }
 
