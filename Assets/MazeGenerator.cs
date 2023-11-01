@@ -36,7 +36,7 @@ public class MazeGenerator : MonoBehaviour
     private void RecursiveBacktracking(int x, int z)
     {
         grid[x, z].visited = true;
-        List<CellDirection> directions = GetShuffledDirections();
+        List<Cell.Direction> directions = GetShuffledDirections();
 
         foreach (var direction in directions)
         {
@@ -52,75 +52,75 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-    private List<CellDirection> GetShuffledDirections()
+    private List<Cell.Direction> GetShuffledDirections()
     {
-        List<CellDirection> directions = new List<CellDirection>
+        List<Cell.Direction> directions = new List<Cell.Direction>
         {
-            CellDirection.Up,
-            CellDirection.Right,
-            CellDirection.Down,
-            CellDirection.Left
+            Cell.Direction.Up,
+            Cell.Direction.Right,
+            Cell.Direction.Down,
+            Cell.Direction.Left
         };
         int n = directions.Count;
         while (n > 1)
         {
             n--;
             int k = Random.Range(0, n + 1);
-            CellDirection temp = directions[k];
+            Cell.Direction temp = directions[k];
             directions[k] = directions[n];
             directions[n] = temp;
         }
         return directions;
     }
 
-    private int DirectionToX(CellDirection direction)
+    private int DirectionToX(Cell.Direction direction)
     {
         switch (direction)
         {
-            case CellDirection.Up:
+            case Cell.Direction.Up:
                 return 1;
-            case CellDirection.Right:
+            case Cell.Direction.Right:
                 return 0;
-            case CellDirection.Down:
+            case Cell.Direction.Down:
                 return -1;
-            case CellDirection.Left:
+            case Cell.Direction.Left:
                 return 0;
             default:
                 return 0;
         }
     }
 
-    private int DirectionToZ(CellDirection direction)
+    private int DirectionToZ(Cell.Direction direction)
     {
         switch (direction)
         {
-            case CellDirection.Up:
+            case Cell.Direction.Up:
                 return 0;
-            case CellDirection.Right:
+            case Cell.Direction.Right:
                 return -1;
-            case CellDirection.Down:
+            case Cell.Direction.Down:
                 return 0;
-            case CellDirection.Left:
+            case Cell.Direction.Left:
                 return 1;
             default:
                 return 0;
         }
     }
 
-    private CellDirection OppositeDirection(CellDirection direction)
+    private Cell.Direction OppositeDirection(Cell.Direction direction)
     {
         switch (direction)
         {
-            case CellDirection.Up:
-                return CellDirection.Down;
-            case CellDirection.Right:
-                return CellDirection.Left;
-            case CellDirection.Down:
-                return CellDirection.Up;
-            case CellDirection.Left:
-                return CellDirection.Right;
+            case Cell.Direction.Up:
+                return Cell.Direction.Down;
+            case Cell.Direction.Right:
+                return Cell.Direction.Left;
+            case Cell.Direction.Down:
+                return Cell.Direction.Up;
+            case Cell.Direction.Left:
+                return Cell.Direction.Right;
             default:
-                return CellDirection.Up;
+                return Cell.Direction.Up;
         }
     }
 }

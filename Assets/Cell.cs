@@ -6,12 +6,21 @@ public class Cell : MonoBehaviour
     public int z;
     public bool visited;
 
-    public GameObject wallTop;
+    public GameObject wallUp;
     public GameObject wallRight;
-    public GameObject wallBottom;
+    public GameObject wallDown;
     public GameObject wallLeft;
 
-    public void RemoveWall(CellDirection direction)
+    // Enum for cell directions
+    public enum Direction
+    {
+        Up,
+        Right,
+        Down,
+        Left
+    }
+
+    public void RemoveWall(Direction direction)
     {
         GameObject wallObject = GetWall(direction);
         if (wallObject != null)
@@ -20,17 +29,17 @@ public class Cell : MonoBehaviour
         }
     }
 
-    private GameObject GetWall(CellDirection direction)
+    private GameObject GetWall(Direction direction)
     {
         switch (direction)
         {
-            case CellDirection.Up:
-                return wallTop;
-            case CellDirection.Right:
+            case Direction.Up:
+                return wallUp;
+            case Direction.Right:
                 return wallRight;
-            case CellDirection.Down:
-                return wallBottom;
-            case CellDirection.Left:
+            case Direction.Down:
+                return wallDown;
+            case Direction.Left:
                 return wallLeft;
             default:
                 return null;

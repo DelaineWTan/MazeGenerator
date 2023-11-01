@@ -1,7 +1,7 @@
-public enum CellDirection
-{
-    Up,
-    Right,
-    Down,
-    Left
-}
+    public enum CellDirection
+    {
+        Up,
+        Right,
+        Down,
+        Left
+    }
