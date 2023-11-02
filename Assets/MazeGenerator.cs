@@ -27,8 +27,6 @@ public class MazeGenerator : MonoBehaviour
                 GameObject cellObject = Instantiate(cellPrefab, new Vector3(x, 0, z), Quaternion.identity);
                 Cell cell = cellObject.GetComponent<Cell>();
                 grid[x, z] = cell;
-                cell.x = x;
-                cell.z = z;
             }
         }
     }

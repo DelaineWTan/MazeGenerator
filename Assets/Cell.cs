@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    public int x;
-    public int z;
     public bool visited;
 
     public GameObject wallUp;
