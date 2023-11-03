@@ -8,7 +8,7 @@ public class MazeGenerator : MonoBehaviour
     public int height = 10;
 
     public GameObject cellPrefab;
-
+    public GameObject exitTriggerPrefab;
     private Cell[,] grid;
 
     private void Start()
@@ -127,27 +127,44 @@ public class MazeGenerator : MonoBehaviour
     {
         // Choose a random border position for the exit
         int borderPosition = Random.Range(0, 4); // 0: Top, 1: Right, 2: Bottom, 3: Left
-        int exitX, exitZ;
+        int exitX = 0, exitZ = 0;
+        float exitXOffset = 0, exitZOffset = 0, exitXScale = 1, exitZScale = 1;
 
         switch (borderPosition)
         {
-            case 0: // Top border, x = width - 1
+            case 0: // Top border
+                exitX = width - 1;
                 exitZ = Random.Range(0, width);
-                grid[width - 1, exitZ].RemoveWall(Cell.Direction.Up);
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Up);
+                exitXOffset = 0.5f;
+                exitXScale = 0.1f;
                 break;
-            case 1: // Right border, z = 0
+            case 1: // Right border
                 exitX = Random.Range(0, width);
-                grid[exitX, 0].RemoveWall(Cell.Direction.Right);
+                exitZ = 0;
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Right);
+                exitZOffset = -0.5f;
+                exitZScale = 0.1f;
                 break;
-            case 2: // Bottom border, x = 0
+            case 2: // Bottom border
+                exitX = 0;
                 exitZ = Random.Range(0, width);
-                grid[0, exitZ].RemoveWall(Cell.Direction.Down);
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Down);
+                exitXOffset = -0.5f;
+                exitXScale = 0.1f;
                 break;
-            case 3: // Left border, z = height - 1
+            case 3: // Left border
                 exitX = Random.Range(0, width);
-                grid[exitX, height - 1].RemoveWall(Cell.Direction.Left);
+                exitZ = height - 1;
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Left);
+                exitZOffset = 0.5f;
+                exitZScale = 0.1f;
                 break;
         }
+
+        // Instantiate the exit trigger prefab at the determined exitX and exitZ
+        GameObject exitTrigger = Instantiate(exitTriggerPrefab, new Vector3(exitX + exitXOffset, -0.5f, exitZ + exitZOffset), Quaternion.identity);
+        exitTrigger.transform.localScale = new Vector3(exitXScale, 0.1f, exitZScale);
     }
 
 }
