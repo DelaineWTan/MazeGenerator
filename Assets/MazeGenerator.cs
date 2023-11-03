@@ -16,6 +16,7 @@ public class MazeGenerator : MonoBehaviour
         grid = new Cell[width, height];
         InitializeGrid();
         RecursiveBacktracking(0, 0);
+        CreateExit();
     }
 
     private void InitializeGrid()
@@ -121,4 +122,32 @@ public class MazeGenerator : MonoBehaviour
                 return Cell.Direction.Up;
         }
     }
+
+    private void CreateExit()
+    {
+        // Choose a random border position for the exit
+        int borderPosition = Random.Range(0, 4); // 0: Top, 1: Right, 2: Bottom, 3: Left
+        int exitX, exitZ;
+
+        switch (borderPosition)
+        {
+            case 0: // Top border, x = width - 1
+                exitZ = Random.Range(0, width);
+                grid[width - 1, exitZ].RemoveWall(Cell.Direction.Up);
+                break;
+            case 1: // Right border, z = 0
+                exitX = Random.Range(0, width);
+                grid[exitX, 0].RemoveWall(Cell.Direction.Right);
+                break;
+            case 2: // Bottom border, x = 0
+                exitZ = Random.Range(0, width);
+                grid[0, exitZ].RemoveWall(Cell.Direction.Down);
+                break;
+            case 3: // Left border, z = height - 1
+                exitX = Random.Range(0, width);
+                grid[exitX, height - 1].RemoveWall(Cell.Direction.Left);
+                break;
+        }
+    }
+
 }
