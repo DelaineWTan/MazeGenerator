@@ -11,6 +11,7 @@ public class MazeGenerator : MonoBehaviour
     public GameObject cellPrefab;
     public GameObject enemyPrefab;
 
+    public GameObject exitTriggerPrefab;
     private Cell[,] grid;
 
     public NavMeshSurface surface;
@@ -22,6 +23,7 @@ public class MazeGenerator : MonoBehaviour
         RecursiveBacktracking(0, 0);
         surface.BuildNavMesh();
         SpawnEnemy();
+        CreateExit();
     }
 
     private void InitializeGrid()
@@ -134,4 +136,48 @@ public class MazeGenerator : MonoBehaviour
         GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, 0, z), Quaternion.identity);
         enemy.GetComponent<EnemyAI>().maze = this;
     }
+    private void CreateExit()
+    {
+        // Choose a random border position for the exit
+        int borderPosition = Random.Range(0, 4); // 0: Top, 1: Right, 2: Bottom, 3: Left
+        int exitX = 0, exitZ = 0;
+        float exitXOffset = 0, exitZOffset = 0, exitXScale = 1, exitZScale = 1;
+
+        switch (borderPosition)
+        {
+            case 0: // Top border
+                exitX = width - 1;
+                exitZ = Random.Range(0, width);
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Up);
+                exitXOffset = 0.5f;
+                exitXScale = 0.1f;
+                break;
+            case 1: // Right border
+                exitX = Random.Range(0, width);
+                exitZ = 0;
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Right);
+                exitZOffset = -0.5f;
+                exitZScale = 0.1f;
+                break;
+            case 2: // Bottom border
+                exitX = 0;
+                exitZ = Random.Range(0, width);
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Down);
+                exitXOffset = -0.5f;
+                exitXScale = 0.1f;
+                break;
+            case 3: // Left border
+                exitX = Random.Range(0, width);
+                exitZ = height - 1;
+                grid[exitX, exitZ].RemoveWall(Cell.Direction.Left);
+                exitZOffset = 0.5f;
+                exitZScale = 0.1f;
+                break;
+        }
+
+        // Instantiate the exit trigger prefab at the determined exitX and exitZ
+        GameObject exitTrigger = Instantiate(exitTriggerPrefab, new Vector3(exitX + exitXOffset, -0.5f, exitZ + exitZOffset), Quaternion.identity);
+        exitTrigger.transform.localScale = new Vector3(exitXScale, 0.1f, exitZScale);
+    }
+
 }
