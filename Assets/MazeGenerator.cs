@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Unity.AI.Navigation;
 
 public class MazeGenerator : MonoBehaviour
 {
@@ -8,14 +9,19 @@ public class MazeGenerator : MonoBehaviour
     public int height = 10;
 
     public GameObject cellPrefab;
+    public GameObject enemyPrefab;
 
     private Cell[,] grid;
+
+    public NavMeshSurface surface;
 
     private void Start()
     {
         grid = new Cell[width, height];
         InitializeGrid();
         RecursiveBacktracking(0, 0);
+        surface.BuildNavMesh();
+        SpawnEnemy();
     }
 
     private void InitializeGrid()
@@ -120,5 +126,12 @@ public class MazeGenerator : MonoBehaviour
             default:
                 return Cell.Direction.Up;
         }
+    }
+
+    private void SpawnEnemy() {
+        int x = Random.Range(0, width);
+        int z = Random.Range(0, height);
+        GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, 0, z), Quaternion.identity);
+        enemy.GetComponent<EnemyAI>().maze = this;
     }
 }
