@@ -25,13 +25,17 @@ public class EnemyAI : MonoBehaviour
     {
         if (agent.remainingDistance == 0)
             setRandomDestination();
+        if (Input.GetKeyDown(KeyCode.Home) || Input.GetButtonDown("Fire1"))
+        {
+            Respawn();
+            Debug.Log("EnemyAI HOME pressed");
+        }
     }
 
     private void setRandomDestination() {
         int x = rng.Next(maze.width);
         int z = rng.Next(maze.height);
         Vector3 randomDestination = new Vector3(x, 0, z);
-        Debug.Log(randomDestination);
         agent.SetDestination(randomDestination);
     }
 

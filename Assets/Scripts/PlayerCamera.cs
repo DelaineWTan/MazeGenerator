@@ -21,6 +21,7 @@ public class PlayerCamera : MonoBehaviour
         // Check if the reset key is pressed on the keyboard (Home key) or gamepad (Fire1 button, e.g., A on Xbox controller)
         if (Input.GetKeyDown(KeyCode.Home) || Input.GetButtonDown("Fire1"))
         {
+            Debug.Log("PlayerCamera HOME pressed");
             // Reset camera rotation
             xRotation = 0f;
             yRotation = 0f;

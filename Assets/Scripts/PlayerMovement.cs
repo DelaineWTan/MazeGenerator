@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         startingPosition = new Vector3(Mathf.Floor(mazeGenerator.width / 2), 0, Mathf.Floor(mazeGenerator.height / 2));
         transform.position = startingPosition;
+        Debug.Log(startingPosition);
     }
 
     private void Update()
@@ -26,7 +27,10 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
         // Reset position on keyboard "HOME" key press or gamepad "Fire1" (A) button
         if (Input.GetKeyDown(KeyCode.Home) || Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("PlayerMovement HOME pressed");
             transform.position = startingPosition;
+        }
         // Toggle collision on keyboard "SPACE" key press or gamepad "Fire2" (B) button
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2"))
             playerCapsuleCollider.enabled = !playerCapsuleCollider.enabled;
