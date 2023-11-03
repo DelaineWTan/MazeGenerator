@@ -45,10 +45,16 @@ public class ExitTrigger : MonoBehaviour
 
                 // Display the "You Win" message
                 if (systemText != null)
-                    systemText.text = "You Win!";
+                    systemText.text = "You exited the maze, you win!";
 
                 hasPlayerExited = true;
             }
         }
+    }
+    public void ResetExitTrigger()
+    {
+        hasPlayerExited = false;
+        if (systemText != null)
+            systemText.text = "";
     }
 }

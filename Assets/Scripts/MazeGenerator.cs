@@ -10,7 +10,7 @@ public class MazeGenerator : MonoBehaviour
 
     public GameObject cellPrefab;
 
-    public GameObject exitTriggerPrefab;
+    public GameObject exitTrigger;
     private Cell[,] grid;
 
     public NavMeshSurface surface;
@@ -168,7 +168,7 @@ public class MazeGenerator : MonoBehaviour
         }
 
         // Instantiate the exit trigger prefab at the determined exitX and exitZ
-        GameObject exitTrigger = Instantiate(exitTriggerPrefab, new Vector3(exitX + exitXOffset, -0.5f, exitZ + exitZOffset), Quaternion.identity);
+        exitTrigger.transform.SetPositionAndRotation(new Vector3(exitX + exitXOffset, -0.5f, exitZ + exitZOffset), Quaternion.identity);
         exitTrigger.transform.localScale = new Vector3(exitXScale, 0.1f, exitZScale);
     }
 

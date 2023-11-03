@@ -7,6 +7,7 @@ public class ResetGame : MonoBehaviour
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] EnemyAI enemyAI;
+    [SerializeField] ExitTrigger exitTrigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class ResetGame : MonoBehaviour
             playerCamera.ResetCamera();
             playerMovement.ResetPlayerPosition();
             enemyAI.ResetEnemy();
+            exitTrigger.ResetExitTrigger();
         }
     }
 }
