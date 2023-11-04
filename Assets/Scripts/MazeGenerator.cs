@@ -10,6 +10,8 @@ public class MazeGenerator : MonoBehaviour
 
     public GameObject cellPrefab;
 
+    public GameObject enemyPrefab;
+
     public GameObject exitTrigger;
     private Cell[,] grid;
 
@@ -22,6 +24,7 @@ public class MazeGenerator : MonoBehaviour
         RecursiveBacktracking(0, 0);
         surface.BuildNavMesh();
         CreateExit();
+        SpawnEnemy();
     }
 
     private void InitializeGrid()
@@ -170,6 +173,13 @@ public class MazeGenerator : MonoBehaviour
         // Instantiate the exit trigger prefab at the determined exitX and exitZ
         exitTrigger.transform.SetPositionAndRotation(new Vector3(exitX + exitXOffset, -0.5f, exitZ + exitZOffset), Quaternion.identity);
         exitTrigger.transform.localScale = new Vector3(exitXScale, 0.1f, exitZScale);
+    }
+
+    private void SpawnEnemy() {
+        int x = Random.Range(0, width);
+        int z = Random.Range(0, height);
+        GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, 0, z), Quaternion.identity);
+        enemy.GetComponent<EnemyAI>().maze = this;
     }
 
 }
