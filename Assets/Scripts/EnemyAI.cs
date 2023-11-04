@@ -4,8 +4,6 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    private readonly int IdleAnimationName = Animator.StringToHash("HumanoidIdle");
-    private readonly int RunAnimationName = Animator.StringToHash("HumanoidRun");
     private Vector3 spawnLocation;
     public MazeGenerator maze;
 
@@ -14,27 +12,18 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] NavMeshSurface navMeshSurface;
     private NavMeshAgent agent;
 
-    private Animator animator;
-
     void Start()
     {
-        maze = GameObject.FindWithTag("Maze").GetComponent<MazeGenerator>();
-        navMeshSurface = GameObject.FindWithTag("NavMeshSurface").GetComponent<NavMeshSurface>();
         spawnLocation = gameObject.transform.position;
         agent = gameObject.GetComponent<NavMeshAgent>();
-        animator = gameObject.GetComponent<Animator>();
         rng = new System.Random();
+        //ResetEnemy();
     }
 
     void Update()
     {
         if (agent.remainingDistance == 0)
             setRandomDestination();
-
-        if (agent.velocity == Vector3.zero)
-            animator.Play(IdleAnimationName);
-        else
-            animator.Play(RunAnimationName);
     }
 
     private void setRandomDestination() 

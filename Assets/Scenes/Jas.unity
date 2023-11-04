@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 446893934}
   m_Layer: 0
   m_Name: NavMesh
-  m_TagString: NavMeshSurface
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 765320222}
   m_Layer: 0
   m_Name: MazeGenerator
-  m_TagString: Maze
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,8 +389,7 @@ MonoBehaviour:
   width: 20
   height: 20
   cellPrefab: {fileID: 7433313251397534117, guid: bac17a3a1a40ad64989fe9c17af15b13, type: 3}
-  enemyPrefab: {fileID: 1016783786427680821, guid: ddbc839722b398748b9d232db8e63f8c, type: 3}
-  exitTrigger: {fileID: 7919280180205052072, guid: 2a1e56d229b82464d81fa44a689502f9, type: 3}
+  enemyPrefab: {fileID: 7523203144019331906, guid: 1edbafcbd9e3a16478697dd7a448001c, type: 3}
   surface: {fileID: 446893934}
 --- !u!1 &963194225
 GameObject:
