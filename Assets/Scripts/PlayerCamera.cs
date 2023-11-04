@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public float sensitivityX = 400f;
-    public float sensitivityY = 400f;
+    public float sensitivityX = 200f;
+    public float sensitivityY = 200f;
 
     public Transform orientation;
 
@@ -21,8 +21,10 @@ public class PlayerCamera : MonoBehaviour
         // Process mouse input for rotation
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
-        yRotation += mouseX;
-        xRotation -= mouseY;
+        float joystickX = Input.GetAxisRaw("Joystick X") * Time.deltaTime * sensitivityX * 2;
+        float joystickY = Input.GetAxisRaw("Joystick Y") * Time.deltaTime * sensitivityY * 2;
+        yRotation += mouseX + joystickX;
+        xRotation -= mouseY + joystickY;
 
         // Camera rotation and orientation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);

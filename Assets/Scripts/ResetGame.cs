@@ -17,8 +17,8 @@ public class ResetGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check if the reset key is pressed on the keyboard (Home key) or gamepad (Fire1 button, e.g., A on Xbox controller)
-        if (Input.GetKeyDown(KeyCode.Home) || Input.GetButtonDown("Fire1"))
+        // Check if the reset key is pressed on the keyboard (Home key) or gamepad "A" button
+        if (Input.GetKeyDown(KeyCode.Home) || Input.GetKeyDown(KeyCode.JoystickButton0))
         {
             playerCamera.ResetCamera();
             playerMovement.ResetPlayerPosition();
