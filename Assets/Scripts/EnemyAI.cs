@@ -6,25 +6,16 @@ public class EnemyAI : MonoBehaviour
 {
     private readonly int IdleAnimationName = Animator.StringToHash("HumanoidIdle");
     private readonly int RunAnimationName = Animator.StringToHash("HumanoidRun");
-    private Vector3 spawnLocation;
     public MazeGenerator maze;
 
-    private System.Random rng;
+    // private System.Random rng;
 
     [SerializeField] NavMeshSurface navMeshSurface;
-    private NavMeshAgent agent;
+    [SerializeField] NavMeshAgent agent;
+        
+    private System.Random rng = new System.Random();
 
-    private Animator animator;
-
-    void Start()
-    {
-        maze = GameObject.FindWithTag("Maze").GetComponent<MazeGenerator>();
-        navMeshSurface = GameObject.FindWithTag("NavMeshSurface").GetComponent<NavMeshSurface>();
-        spawnLocation = gameObject.transform.position;
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        animator = gameObject.GetComponent<Animator>();
-        rng = new System.Random();
-    }
+    [SerializeField] Animator animator;
 
     void Update()
     {
@@ -44,13 +35,15 @@ public class EnemyAI : MonoBehaviour
             int x = rng.Next(maze.width);
             int z = rng.Next(maze.height);
             Vector3 randomDestination = new Vector3(x, 0, z);
-            agent.SetDestination(randomDestination);
+            agent.SetDestination(randomDestination);   
         }
     }
 
     public void ResetEnemy()
     {
-        gameObject.transform.position = spawnLocation;
+        int x = rng.Next(0, maze.width);
+        int z = rng.Next(0, maze.height);
+        transform.position = new Vector3(x, 0, z);
         setRandomDestination();
-    } 
+    }
 }

@@ -6,12 +6,12 @@ public class ResetGame : MonoBehaviour
 {
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] PlayerMovement playerMovement;
-    [SerializeField] EnemyAI enemyAI;
     [SerializeField] ExitTrigger exitTrigger;
+    private EnemyAI enemyAI;
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemyAI = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyAI>();
     }
 
     // Update is called once per frame
