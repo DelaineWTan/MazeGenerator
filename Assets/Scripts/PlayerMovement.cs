@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        // Toggle collision on keyboard "SPACE" key press or gamepad "Fire2" (B) button
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2"))
+        // Toggle collision on keyboard "SPACE" key press or gamepad "B" button
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1))
             playerCapsuleCollider.enabled = !playerCapsuleCollider.enabled;
     }
 
