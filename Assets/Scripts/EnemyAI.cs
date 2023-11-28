@@ -12,15 +12,25 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] NavMeshSurface navMeshSurface;
     [SerializeField] NavMeshAgent agent;
+
+    private int hitCount = 0;
         
-    private System.Random rng = new System.Random();
+    private System.Random rng;
 
     [SerializeField] Animator animator;
+
+
+    void Start() {
+        maze = FindFirstObjectByType<MazeGenerator>();
+        navMeshSurface = maze.surface;
+        rng = new System.Random();
+    }
 
     void Update()
     {
         if (agent.remainingDistance == 0)
-            setRandomDestination();
+            agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
+            // setRandomDestination();
 
         if (agent.velocity == Vector3.zero)
             animator.Play(IdleAnimationName);
@@ -46,4 +56,9 @@ public class EnemyAI : MonoBehaviour
         transform.position = new Vector3(x, 0, z);
         setRandomDestination();
     }
+
+    public int IncrementHitCount() {
+        return ++hitCount;
+    }
+
 }
