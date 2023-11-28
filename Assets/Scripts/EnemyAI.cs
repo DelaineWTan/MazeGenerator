@@ -20,7 +20,8 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         if (agent.remainingDistance == 0)
-            setRandomDestination();
+            agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
+            // setRandomDestination();
 
         if (agent.velocity == Vector3.zero)
             animator.Play(IdleAnimationName);
