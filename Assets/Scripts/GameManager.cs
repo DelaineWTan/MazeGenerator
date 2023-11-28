@@ -20,15 +20,12 @@ public class GameManager : MonoBehaviour
     public void KillAndRespawnEnemy() {
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
         Destroy(enemy);
-        Debug.Log("We've destroyed the enemy");
         Invoke("RespawnEnemy", 5.0f);
     }
 
     public void RespawnEnemy() {
         EnemyAI enemyAI = Instantiate(enemyPrefab, transform).GetComponent<EnemyAI>();
-        Debug.Log("Did we reach this point?");
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyAI>().ResetEnemy();
         // playsfx
-        Debug.Log("We've respawned the enemy");
     }
 }
