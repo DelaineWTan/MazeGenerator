@@ -14,7 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] GameObject WallCollideSFX;
     [SerializeField] GameObject FootstepsSFX;
+    [SerializeField] GameObject PlayerDeathSFX;
     private AudioSource footstepsAudioSrc;
+    private bool IsDead;
 
     private void Start()
     {
@@ -25,10 +27,13 @@ public class PlayerMovement : MonoBehaviour
 
         // Initialize and configure the audio source for footsteps
         footstepsAudioSrc = PlaySfx.PlayWithLoop(FootstepsSFX, transform).GetComponent<AudioSource>();
+        IsDead = false;
     }
 
     private void Update()
     {
+        if (IsDead)
+            return;
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         // Toggle collision on keyboard "SPACE" key press or gamepad "B" button
@@ -59,7 +64,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
             PlaySfx.PlayThenDestroy(WallCollideSFX, transform);
+        if (collision.gameObject.tag == "EnemyMesh" && !IsDead)
+        {
+            Invoke("Reset", 5);
+            PlaySfx.PlayThenDestroy(PlayerDeathSFX, transform);
+            IsDead = true;
+        }
+    }
+
+    private void Reset()
+    {
+        ResetGame ResetGame = FindFirstObjectByType<ResetGame>();
+        ResetGame.Reset();
+        IsDead = false;
     }
 }
