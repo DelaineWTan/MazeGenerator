@@ -8,9 +8,12 @@ public class ResetGame : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] ExitTrigger exitTrigger;
     private EnemyAI enemyAI;
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         enemyAI = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyAI>();
     }
 
@@ -22,8 +25,16 @@ public class ResetGame : MonoBehaviour
         {
             playerCamera.ResetCamera();
             playerMovement.ResetPlayerPosition();
-            enemyAI.ResetEnemy();
+
+            if (enemyAI != null) // we might be respawning the enemy
+                enemyAI.ResetEnemy();
+                
             exitTrigger.ResetExitTrigger();
+            gameManager.ResetScore();
         }
+    }
+
+    public void SetNewEnemy(EnemyAI newEnemyAI) {
+        enemyAI = newEnemyAI;
     }
 }

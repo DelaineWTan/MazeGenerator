@@ -15,6 +15,8 @@ public class MazeGenerator : MonoBehaviour
 
     public NavMeshSurface surface;
 
+    public Material pongDoorMat;
+
     private void Start()
     {
         grid = new Cell[width, height];
@@ -22,6 +24,7 @@ public class MazeGenerator : MonoBehaviour
         RecursiveBacktracking(0, 0);
         surface.BuildNavMesh();
         CreateExit();
+        CreatePongDoor();
     }
 
     private void InitializeGrid()
@@ -170,6 +173,23 @@ public class MazeGenerator : MonoBehaviour
         // Instantiate the exit trigger prefab at the determined exitX and exitZ
         exitTrigger.transform.SetPositionAndRotation(new Vector3(exitX + exitXOffset, -0.5f, exitZ + exitZOffset), Quaternion.identity);
         exitTrigger.transform.localScale = new Vector3(exitXScale, 0.1f, exitZScale);
+    }
+
+    private void CreatePongDoor() {
+        Debug.Log("creating pong door");
+        System.Random rng = new System.Random();
+        int x = rng.Next(0, width);
+        int y = rng.Next(0, height);
+
+        Cell cell = grid[x, y];
+        Transform[] walls = cell.transform.GetComponentsInChildren<Transform>(false);
+
+        int wallIndex = rng.Next(1, walls.Length - 1); // 1 start to exclude parent, -1 boundary to exclude ground.
+        GameObject randomWall = walls[wallIndex].gameObject;
+        randomWall.name = "PongDoor"; // remove this after
+        randomWall.GetComponent<Renderer>().material = pongDoorMat;
+        randomWall.AddComponent<PongDoor>();
+
     }
 
 }

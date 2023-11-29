@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerActions : MonoBehaviour
 {
     private Camera camera;
 
@@ -15,11 +15,19 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField]
     private float m_shootForce = 5.0f;
 
+    [SerializeField]
+    private GameObject m_flashLightSFX;
+
+    [SerializeField]
+    private GameObject flashlight;
+
     private float timer = 0f;
 
     private bool onCd = false;
 
     private GameObject ball;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +52,9 @@ public class PlayerShoot : MonoBehaviour
 
         if (!onCd && Input.GetKeyDown(KeyCode.Mouse0))
             ShootBall();
+
+        if (Input.GetKeyDown(KeyCode.F))
+            ToggleFlashlight();
     }
 
     private void ShootBall() {
@@ -51,5 +62,10 @@ public class PlayerShoot : MonoBehaviour
         ball = Instantiate(m_ballPrefab, transform.position + transform.forward * 0.3f, Quaternion.identity);
         ball.GetComponent<Rigidbody>().AddForce(transform.forward * m_shootForce, ForceMode.Impulse);
         onCd = true;
+    }
+
+    private void ToggleFlashlight() {
+        PlaySfx.PlayThenDestroy(m_flashLightSFX, transform);
+        flashlight.SetActive(!flashlight.activeSelf);
     }
 }

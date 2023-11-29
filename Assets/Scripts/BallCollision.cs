@@ -16,6 +16,7 @@ public class BallCollision : MonoBehaviour
         PlaySfx.PlayThenDestroy(bounceSFX, transform);
         GameObject hit = collision.gameObject;
         if (hit.tag == "EnemyMesh") {
+            gameManager.IncrementScore();
             int hitCount = hit.transform.parent.GetComponent<EnemyAI>().IncrementHitCount();
             if (hitCount >= 3)
                 gameManager.KillAndRespawnEnemy();
