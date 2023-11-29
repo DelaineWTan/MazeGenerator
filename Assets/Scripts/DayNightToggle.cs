@@ -5,6 +5,7 @@ public class DayNightToggle : MonoBehaviour
 {
     [SerializeField] GameObject DayMusic;
     [SerializeField] GameObject NightMusic;
+    [SerializeField] Light DirectionalLight;
 
     // Static variable to store the toggle value globally
     private static float globalDayNightToggleValue = 0.0f;
@@ -47,9 +48,15 @@ public class DayNightToggle : MonoBehaviour
             PlaySfx.StopLoopedAudio(BGMAudioObject);
 
         if (globalDayNightToggleValue == 1.0f)
+        {
             BGMAudioObject = PlaySfx.PlayWithLoop(DayMusic, transform);
+            DirectionalLight.intensity = 1.0f;
+        }
         else if (globalDayNightToggleValue == 0.0f)
+        {
             BGMAudioObject = PlaySfx.PlayWithLoop(NightMusic, transform);
+            DirectionalLight.intensity = 0.3f;
+        }
     }
 
     void ToggleBGM()

@@ -715,6 +715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DayMusic: {fileID: 4148277713069886780, guid: 0825e2194658e134db3fd5b73387da9c, type: 3}
   NightMusic: {fileID: 4148277713069886780, guid: 1cbcf0e810781b1488d6a21bc1f43a49, type: 3}
+  DirectionalLight: {fileID: 705507994}
 --- !u!1 &887239331
 GameObject:
   m_ObjectHideFlags: 0
