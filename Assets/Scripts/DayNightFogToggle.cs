@@ -8,7 +8,6 @@ public class DayNightToggle : MonoBehaviour
 
     // Static variable to store the toggle value globally
     private static float globalDayNightToggleValue = 0.0f;
-    private static float globalFogToggleValue = 1.0f;
     // Reference to current BGM
     private GameObject BGMAudioObject;
 
@@ -16,8 +15,6 @@ public class DayNightToggle : MonoBehaviour
     {
         // Start as Day and play BGM
         ToggleDayNight();
-        // Start with no Fog
-        ToggleFog();
     }
 
     void Update()
@@ -26,11 +23,6 @@ public class DayNightToggle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleDayNight();
-        }
-        // Check for user input to toggle fog
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ToggleFog();
         }
         // Check for user input to toggle BGM on/off
         if (Input.GetKeyDown(KeyCode.M))
@@ -45,8 +37,8 @@ public class DayNightToggle : MonoBehaviour
         globalDayNightToggleValue = (globalDayNightToggleValue > 0.5f) ? 0.0f : 1.0f;
 
         // Find all objects using the DayNightShader and update the toggle value
-        DayNightFogShader[] dayNightShaders = FindObjectsOfType<DayNightFogShader>();
-        foreach (DayNightFogShader shader in dayNightShaders)
+        DayNightShader[] dayNightShaders = FindObjectsOfType<DayNightShader>();
+        foreach (DayNightShader shader in dayNightShaders)
         {
             shader.SetToggleValue(globalDayNightToggleValue);
         }
@@ -60,26 +52,13 @@ public class DayNightToggle : MonoBehaviour
             BGMAudioObject = PlaySfx.PlayWithLoop(NightMusic, transform);
     }
 
-    void ToggleFog()
-    {
-        // Toggle the global fog value between 0 and 1
-        globalFogToggleValue = (globalFogToggleValue > 0.5f) ? 0.0f : 1.0f;
-        Debug.Log(globalFogToggleValue);
-        // Find all objects using the DayNightFogShader and update the fog toggle value
-        DayNightFogShader[] dayNightFogShaders = FindObjectsOfType<DayNightFogShader>();
-        foreach (DayNightFogShader fogShader in dayNightFogShaders)
-        {
-            fogShader.SetFogToggleValue(globalFogToggleValue);
-        }
-    }
-
     void ToggleBGM()
     {
         if (BGMAudioObject != null)
         {
             AudioSource BGMAudioSrc = BGMAudioObject.GetComponent<AudioSource>();
             if (!BGMAudioSrc.mute)
-                BGMAudioSrc.mute = true;
+                BGMAudioSrc.mute = true;    
             else
                 BGMAudioSrc.mute = false;
         }
@@ -88,10 +67,5 @@ public class DayNightToggle : MonoBehaviour
     public static float GetGlobalToggleValue()
     {
         return globalDayNightToggleValue;
-    }
-
-    public static float GetGlobalFogToggleValue()
-    {
-        return globalFogToggleValue;
     }
 }
