@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (agent.remainingDistance == 0)
+        // if (agent.remainingDistance == 0)
             agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
             // setRandomDestination();
 
