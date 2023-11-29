@@ -713,6 +713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5bc134a71511e40a99bb18b8b3f822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DayMusic: {fileID: 4148277713069886780, guid: 0825e2194658e134db3fd5b73387da9c, type: 3}
+  NightMusic: {fileID: 4148277713069886780, guid: 1cbcf0e810781b1488d6a21bc1f43a49, type: 3}
 --- !u!1 &887239331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,6 +1187,9 @@ MonoBehaviour:
   orientation: {fileID: 887239332}
   playerCapsuleCollider: {fileID: 1848597842}
   mazeGenerator: {fileID: 765320222}
+  WallCollideSFX: {fileID: 1984365129815940660, guid: 30066f0ce0bf3f14f871d5e764d1ac47, type: 3}
+  FootstepsSFX: {fileID: 1984365129815940660, guid: 65f096aac8ba9d9448c892ab2a1264d9, type: 3}
+  PlayerDeathSFX: {fileID: 1984365129815940660, guid: 7eeb384d8d38aea4e885aa5b2d2171d2, type: 3}
 --- !u!1 &1736959549
 GameObject:
   m_ObjectHideFlags: 0
