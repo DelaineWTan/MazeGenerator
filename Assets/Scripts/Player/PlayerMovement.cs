@@ -38,11 +38,11 @@ public class PlayerMovement : MonoBehaviour
         // Check if player is moving horizontally and play footsteps sound on loop
         if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
         {
-            footstepsAudioSrc.volume = 1.0f; // Adjust volume as needed
+            footstepsAudioSrc.mute = false;
         }
         else
         {
-            footstepsAudioSrc.volume = 0.0f; // Stop footsteps sound if not moving
+            footstepsAudioSrc.mute = true; // Stop footsteps sound if not moving
         }
     }
 

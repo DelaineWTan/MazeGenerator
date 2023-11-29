@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DayNightShader : MonoBehaviour
+public class DayNightFogShader : MonoBehaviour
 {
     // Reference to the material
     private Material material;
@@ -18,5 +18,11 @@ public class DayNightShader : MonoBehaviour
     public void SetToggleValue(float value)
     {
         material.SetFloat("_ToggleDayNight", value);
+    }
+
+    // Set fog toggle value from the DayNightToggle script
+    public void SetFogToggleValue(float value)
+    {
+        material.SetFloat("_ToggleFog", value);
     }
 }
