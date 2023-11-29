@@ -23,15 +23,16 @@ public class ResetGame : MonoBehaviour
         // Check if the reset key is pressed on the keyboard (Home key) or gamepad "A" button
         if (Input.GetKeyDown(KeyCode.Home) || Input.GetKeyDown(KeyCode.JoystickButton0))
         {
-            playerCamera.ResetCamera();
-            playerMovement.ResetPlayerPosition();
-
-            if (enemyAI != null) // we might be respawning the enemy
-                enemyAI.ResetEnemy();
-                
-            exitTrigger.ResetExitTrigger();
-            gameManager.ResetScore();
+            Reset();
         }
+    }
+
+    public void Reset()
+    {
+        playerCamera.ResetCamera();
+        playerMovement.ResetPlayerPosition();
+        enemyAI.ResetEnemy();
+        exitTrigger.ResetExitTrigger();
     }
 
     public void SetNewEnemy(EnemyAI newEnemyAI) {
