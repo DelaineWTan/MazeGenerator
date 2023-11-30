@@ -17,13 +17,13 @@ public class ExitTrigger : MonoBehaviour
         if (systemText != null)
             systemText.text = "";
         // else
-        // // Find the Player object in the hierarchy
-        // playerTransform = GameObject.Find("Player").transform;
+        // Find the Player object in the hierarchy
+        playerTransform = GameObject.Find("Player").transform;
     }
 
     private void Update()
     {
-        if (!hasPlayerExited)
+        if (!hasPlayerExited && playerTransform != null)
         {
             // Define a trigger area box that's wider than the trigger object
             Vector3 triggerScale = transform.localScale;

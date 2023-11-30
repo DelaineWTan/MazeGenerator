@@ -21,7 +21,8 @@ public class EnemyAI : MonoBehaviour
 
 
     void Start() {
-        maze = FindFirstObjectByType<MazeGenerator>();
+        agent = GetComponent<NavMeshAgent>();
+        maze = transform.parent.gameObject.GetComponent<MazeGenerator>();
         navMeshSurface = maze.surface;
         rng = new System.Random();
     }
@@ -67,5 +68,6 @@ public class EnemyAI : MonoBehaviour
         playingBGM.transform.parent = this.transform;
         return playingBGM;
     }
+
 
 }

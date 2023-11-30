@@ -16,6 +16,8 @@ public class PongDoor : MonoBehaviour
         if (hit.tag == "Player") {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            GameObject.FindFirstObjectByType<GameManager>().SaveData();
+            GameObject.FindFirstObjectByType<Camera>().gameObject.SetActive(false);
             SceneManager.LoadScene("Pong");
         }
     }

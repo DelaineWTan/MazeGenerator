@@ -17,15 +17,25 @@ public class MazeGenerator : MonoBehaviour
 
     public Material pongDoorMat;
 
+    public static bool isLoaded = false;
+
     private void Start()
     {
-        Debug.Log("We have " + transform.childCount + " children");
-        grid = new Cell[width, height];
-        InitializeGrid();
-        RecursiveBacktracking(0, 0);
-        surface.BuildNavMesh();
-        CreateExit();
-        CreatePongDoor();
+        if (!isLoaded) {
+            grid = new Cell[width, height];
+            InitializeGrid();
+            RecursiveBacktracking(0, 0);
+            surface.BuildNavMesh();
+            CreateExit();
+            CreatePongDoor();
+            DontDestroyOnLoad(gameObject);
+            isLoaded = true;
+        } else {
+            GameObject.FindFirstObjectByType<Camera>(FindObjectsInactive.Include).gameObject.SetActive(true);
+            GameObject.FindFirstObjectByType<ExitTrigger>().playerTransform = GameObject.Find("Player").transform;
+            surface.BuildNavMesh();
+            Destroy(gameObject);
+        }
     }
 
     private void InitializeGrid()
@@ -36,6 +46,7 @@ public class MazeGenerator : MonoBehaviour
             {
                 GameObject cellObject = Instantiate(cellPrefab, new Vector3(x, 0, z), Quaternion.identity);
                 cellObject.transform.parent = transform;
+                DontDestroyOnLoad(cellObject);
                 Cell cell = cellObject.GetComponent<Cell>();
                 grid[x, z] = cell;
             }
@@ -192,5 +203,6 @@ public class MazeGenerator : MonoBehaviour
         randomWall.AddComponent<PongDoor>();
 
     }
+    
 
 }

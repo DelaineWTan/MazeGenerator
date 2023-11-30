@@ -85,10 +85,10 @@ public class ToggleEffects : MonoBehaviour
         if (BGMAudioObject != null)
         {
             AudioSource BGMAudioSrc = BGMAudioObject.GetComponent<AudioSource>();
-            if (!BGMAudioSrc.mute)
-                BGMAudioSrc.mute = true;    
+            if (BGMAudioSrc.isPlaying)
+                BGMAudioSrc.Stop();
             else
-                BGMAudioSrc.mute = false;
+                BGMAudioSrc.Play();
         }
     }
     // Getter method for other scripts to access the global toggle values

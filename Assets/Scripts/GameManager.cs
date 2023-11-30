@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         GameObject BGM = FindFirstObjectByType<ToggleEffects>().GetBGMTrack();
 
         PlaySfx.PlayThenDestroy(enemyRespawnSFX, GameObject.FindGameObjectWithTag("Player").transform);
-        EnemyAI enemyAI = Instantiate(enemyPrefab, transform).GetComponent<EnemyAI>();
+        EnemyAI enemyAI = Instantiate(enemyPrefab, GameObject.FindFirstObjectByType<MazeGenerator>().transform).GetComponent<EnemyAI>();
         resetGame.SetNewEnemy(enemyAI);
         enemyAI.SetEnemyBGM(BGM);
         GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyAI>().ResetEnemyPosition();
@@ -68,12 +68,12 @@ public class GameManager : MonoBehaviour
         scoreTracker.GetComponent<TextMeshProUGUI>().text = "Score: " + 0;
     }
 
-    private void SaveData()
+    public void SaveData()
     {
         // Save player position
-        PlayerPrefs.SetFloat(playerPositionKey + "X", GameObject.FindGameObjectWithTag("Player").transform.position.x);
+        PlayerPrefs.SetFloat(playerPositionKey + "X", Mathf.Round(GameObject.FindGameObjectWithTag("Player").transform.position.x));
         PlayerPrefs.SetFloat(playerPositionKey + "Y", GameObject.FindGameObjectWithTag("Player").transform.position.y);
-        PlayerPrefs.SetFloat(playerPositionKey + "Z", GameObject.FindGameObjectWithTag("Player").transform.position.z);
+        PlayerPrefs.SetFloat(playerPositionKey + "Z", Mathf.Round(GameObject.FindGameObjectWithTag("Player").transform.position.z));
 
         // Save enemy position
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void LoadSavedData()
+    public void LoadSavedData()
     {
         // Load player position
         float playerX = PlayerPrefs.GetFloat(playerPositionKey + "X");
