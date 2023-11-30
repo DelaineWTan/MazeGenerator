@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Jas.unity
+    path: Assets/Scenes/JasOld.unity
     guid: 750b0da14e7b8d345bcd6be345fa4c4c
   - enabled: 1
     path: Assets/Scenes/Pong.unity

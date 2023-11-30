@@ -61,4 +61,10 @@ public class EnemyAI : MonoBehaviour
         return ++hitCount;
     }
 
+    public GameObject SetEnemyBGM(GameObject bgm) {
+        GameObject playingBGM = PlaySfx.PlayWithLoop(bgm, transform);
+        playingBGM.transform.parent = this.transform;
+        return playingBGM;
+    }
+
 }
