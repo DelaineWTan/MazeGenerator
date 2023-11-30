@@ -19,6 +19,7 @@ public class MazeGenerator : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("We have " + transform.childCount + " children");
         grid = new Cell[width, height];
         InitializeGrid();
         RecursiveBacktracking(0, 0);

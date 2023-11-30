@@ -5,7 +5,7 @@ public class ExitTrigger : MonoBehaviour
 {
     public TMP_Text systemText;
     public bool hasPlayerExited = false;
-    private Transform playerTransform;
+    public Transform playerTransform;
 
     private void Start()
     {
@@ -16,9 +16,9 @@ public class ExitTrigger : MonoBehaviour
 
         if (systemText != null)
             systemText.text = "";
-        else
-        // Find the Player object in the hierarchy
-        playerTransform = GameObject.Find("Player").transform;
+        // else
+        // // Find the Player object in the hierarchy
+        // playerTransform = GameObject.Find("Player").transform;
     }
 
     private void Update()
