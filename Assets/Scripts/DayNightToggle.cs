@@ -14,6 +14,7 @@ public class DayNightToggle : MonoBehaviour
 
     void Start()
     {
+        globalDayNightToggleValue = 0.0f;
         // Start as Day and play BGM
         ToggleDayNight();
     }
@@ -41,21 +42,25 @@ public class DayNightToggle : MonoBehaviour
         DayNightShader[] dayNightShaders = FindObjectsOfType<DayNightShader>();
         foreach (DayNightShader shader in dayNightShaders)
         {
+            Debug.Log(shader);
+            Debug.Log(globalDayNightToggleValue);
             shader.SetToggleValue(globalDayNightToggleValue);
         }
+
+        EnemyAI enemy = GameObject.FindFirstObjectByType<EnemyAI>();
 
         if (BGMAudioObject != null)
             PlaySfx.StopLoopedAudio(BGMAudioObject);
 
-        if (globalDayNightToggleValue == 1.0f)
+        if (globalDayNightToggleValue == 1.0f && enemy != null)
         {
-            BGMAudioObject = PlaySfx.PlayWithLoop(DayMusic, transform);
+            BGMAudioObject = enemy.SetEnemyBGM(DayMusic);
             DirectionalLight.intensity = 1.0f;
         }
-        else if (globalDayNightToggleValue == 0.0f)
+        else if (globalDayNightToggleValue == 0.0f && enemy != null)
         {
-            BGMAudioObject = PlaySfx.PlayWithLoop(NightMusic, transform);
-            DirectionalLight.intensity = 0.3f;
+            BGMAudioObject = enemy.SetEnemyBGM(NightMusic);
+            DirectionalLight.intensity = 0.1f;
         }
     }
 
@@ -74,5 +79,9 @@ public class DayNightToggle : MonoBehaviour
     public static float GetGlobalToggleValue()
     {
         return globalDayNightToggleValue;
+    }
+
+    public GameObject GetBGMTrack() {
+        return globalDayNightToggleValue == 1.0f ? DayMusic : NightMusic;
     }
 }
