@@ -9,6 +9,9 @@ TagManager:
   - Ball
   - EnemyMesh
   - GameManager
+  - AI Wall
+  - Player Wall
+  - Score
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - UI
   - Wall
   - Actors
-  - 
+  - LightRay
   - 
   - 
   - 

@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (agent.remainingDistance == 0)
+        // if (agent.remainingDistance == 0)
             agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
             // setRandomDestination();
 
@@ -59,6 +59,12 @@ public class EnemyAI : MonoBehaviour
 
     public int IncrementHitCount() {
         return ++hitCount;
+    }
+
+    public GameObject SetEnemyBGM(GameObject bgm) {
+        GameObject playingBGM = PlaySfx.PlayWithLoop(bgm, transform);
+        playingBGM.transform.parent = this.transform;
+        return playingBGM;
     }
 
 }

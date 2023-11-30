@@ -8,9 +8,12 @@ public class ResetGame : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] ExitTrigger exitTrigger;
     private EnemyAI enemyAI;
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         enemyAI = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyAI>();
     }
 
@@ -30,5 +33,9 @@ public class ResetGame : MonoBehaviour
         playerMovement.ResetPlayerPosition();
         enemyAI.ResetEnemy();
         exitTrigger.ResetExitTrigger();
+    }
+
+    public void SetNewEnemy(EnemyAI newEnemyAI) {
+        enemyAI = newEnemyAI;
     }
 }

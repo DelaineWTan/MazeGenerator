@@ -16,6 +16,7 @@ public class DayNightToggle : MonoBehaviour
 
     void Start()
     {
+        globalDayNightToggleValue = 0.0f;
         // Start as Day and play BGM
         ToggleDayNight();
         // Start with no fog
@@ -59,21 +60,25 @@ public class DayNightToggle : MonoBehaviour
         DayNightShader[] dayNightShaders = FindObjectsOfType<DayNightShader>();
         foreach (DayNightShader shader in dayNightShaders)
         {
+            Debug.Log(shader);
+            Debug.Log(globalDayNightToggleValue);
             shader.SetToggleValue(globalDayNightToggleValue);
         }
+
+        EnemyAI enemy = GameObject.FindFirstObjectByType<EnemyAI>();
 
         if (BGMAudioObject != null)
             PlaySfx.StopLoopedAudio(BGMAudioObject);
 
-        if (globalDayNightToggleValue == 1.0f)
+        if (globalDayNightToggleValue == 1.0f && enemy != null)
         {
-            BGMAudioObject = PlaySfx.PlayWithLoop(DayMusic, transform);
+            BGMAudioObject = enemy.SetEnemyBGM(DayMusic);
             DirectionalLight.intensity = 1.0f;
         }
-        else if (globalDayNightToggleValue == 0.0f)
+        else if (globalDayNightToggleValue == 0.0f && enemy != null)
         {
-            BGMAudioObject = PlaySfx.PlayWithLoop(NightMusic, transform);
-            DirectionalLight.intensity = 0.3f;
+            BGMAudioObject = enemy.SetEnemyBGM(NightMusic);
+            DirectionalLight.intensity = 0.1f;
         }
     }
 
@@ -99,5 +104,10 @@ public class DayNightToggle : MonoBehaviour
         // Toggle the fog cube on and off
         fogCube.SetActive(!fogCube.activeSelf);
         isFogOn = !isFogOn;
+    }
+
+    public GameObject GetBGMTrack() {
+        return globalDayNightToggleValue == 1.0f ? DayMusic : NightMusic;
+
     }
 }

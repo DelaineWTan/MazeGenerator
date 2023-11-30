@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7500167654587402935}
   - component: {fileID: 4131362655790247652}
   - component: {fileID: 2666536401877357282}
-  - component: {fileID: 2107564697233717454}
+  - component: {fileID: 3752625752983374855}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2107564697233717454
+--- !u!114 &3752625752983374855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6999063000533561682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d37b941a028dff4bb8cb8b0c8faf906, type: 3}
+  m_Script: {fileID: 11500000, guid: 73f9ad5c40ef9e047ad1aacd9e09b167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bounceSFX: {fileID: 1984365129815940660, guid: 1b554fb8fe489d64d8723cf8c6a059e8, type: 3}
+  gameManager: {fileID: 0}
