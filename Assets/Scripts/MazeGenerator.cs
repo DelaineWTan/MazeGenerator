@@ -31,6 +31,7 @@ public class MazeGenerator : MonoBehaviour
             for (int z = 0; z < height; z++)
             {
                 GameObject cellObject = Instantiate(cellPrefab, new Vector3(x, 0, z), Quaternion.identity);
+                cellObject.transform.parent = transform;
                 Cell cell = cellObject.GetComponent<Cell>();
                 grid[x, z] = cell;
             }
