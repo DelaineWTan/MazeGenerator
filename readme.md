@@ -1,11 +1,16 @@
 ## GENERAL CONTROLS ##
-Movement done with WASD on kb&m or the left analog stick of a controller.
-
-Camera controlled by the mouse on kb&m or the right analog stick of a controller.
-
-Reset game state = HOME key on kb&m or A button on Xbox controller
-
-Noclip (just horizontal, no flying) = Space bar on kb&m or B button on Xbox controller
+WASD / RIGHT JOYSTICK - Movement
+MOUSE / RIGHT JOYSTICK - Camera
+HOME / A BUTTON - Reset Game
+SPACEBAR / B BUTTON - Noclip Toggle
+F - Flashlight Toggle
+G - Fog Toggle (BGM VOLUME HALVES)
+LMB - Throw Ball
+F5 - Save Game
+F9 - Load Game
+TAB - Day/Night Toggle
+M - Mute BGM Toggle
+FOR PONG GAME CONTROLS SEE A1 
 
 ## GAMEPLAY OVERVIEW ##
 The game starts with the player in the middle of a randomly generated maze with an ambient
