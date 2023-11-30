@@ -6,17 +6,21 @@ public class DayNightToggle : MonoBehaviour
     [SerializeField] GameObject DayMusic;
     [SerializeField] GameObject NightMusic;
     [SerializeField] Light DirectionalLight;
+    [SerializeField] GameObject fogCube;
 
     // Static variable to store the toggle value globally
     private static float globalDayNightToggleValue = 0.0f;
     // Reference to current BGM
     private GameObject BGMAudioObject;
+    private bool isFogOn;
 
     void Start()
     {
         globalDayNightToggleValue = 0.0f;
         // Start as Day and play BGM
         ToggleDayNight();
+        // Start with no fog
+        isFogOn = false;
     }
 
     void Update()
@@ -30,6 +34,20 @@ public class DayNightToggle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             ToggleBGM();
+        }
+
+        // Check for user input to toggle fog
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ToggleFog();
+        }
+        if (BGMAudioObject != null)
+        {
+            AudioSource BGMAudioSrc = BGMAudioObject.GetComponent<AudioSource>();
+            if (isFogOn)
+                BGMAudioSrc.volume = 0.5f;
+            else
+                BGMAudioSrc.volume = 1f;
         }
     }
 
@@ -81,7 +99,15 @@ public class DayNightToggle : MonoBehaviour
         return globalDayNightToggleValue;
     }
 
+    void ToggleFog()
+    {
+        // Toggle the fog cube on and off
+        fogCube.SetActive(!fogCube.activeSelf);
+        isFogOn = !isFogOn;
+    }
+
     public GameObject GetBGMTrack() {
         return globalDayNightToggleValue == 1.0f ? DayMusic : NightMusic;
+
     }
 }
