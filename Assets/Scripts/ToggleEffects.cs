@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class DayNightToggle : MonoBehaviour
+public class ToggleEffects : MonoBehaviour
 {
     [SerializeField] GameObject DayMusic;
     [SerializeField] GameObject NightMusic;
@@ -37,7 +37,7 @@ public class DayNightToggle : MonoBehaviour
         }
 
         // Check for user input to toggle fog
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             ToggleFog();
         }
@@ -60,8 +60,6 @@ public class DayNightToggle : MonoBehaviour
         DayNightShader[] dayNightShaders = FindObjectsOfType<DayNightShader>();
         foreach (DayNightShader shader in dayNightShaders)
         {
-            Debug.Log(shader);
-            Debug.Log(globalDayNightToggleValue);
             shader.SetToggleValue(globalDayNightToggleValue);
         }
 

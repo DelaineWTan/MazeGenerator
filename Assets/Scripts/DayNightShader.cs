@@ -3,7 +3,7 @@ using UnityEngine;
 public class DayNightShader : MonoBehaviour
 {
     // Reference to the material
-    private Material material;
+    [SerializeField] Material material;
 
     void Start()
     {
@@ -11,7 +11,7 @@ public class DayNightShader : MonoBehaviour
         material = GetComponent<Renderer>().material;
 
         // Set the initial toggle value based on the global value
-        SetToggleValue(DayNightToggle.GetGlobalToggleValue());
+        SetToggleValue(ToggleEffects.GetGlobalToggleValue());
     }
 
     // Method to set the toggle value in the shader

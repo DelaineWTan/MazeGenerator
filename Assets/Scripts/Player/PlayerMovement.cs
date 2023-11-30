@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Initialize and configure the audio source for footsteps
         footstepsAudioSrc = PlaySfx.PlayWithLoop(FootstepsSFX, transform).GetComponent<AudioSource>();
+        footstepsAudioSrc.transform.parent = transform;
         IsDead = false;
     }
 

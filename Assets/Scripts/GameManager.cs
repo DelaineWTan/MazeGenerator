@@ -34,13 +34,13 @@ public class GameManager : MonoBehaviour
 
     public void RespawnEnemy() {
         ResetGame resetGame = GameObject.FindFirstObjectByType<ResetGame>();
-        GameObject BGM = GameObject.FindFirstObjectByType<DayNightToggle>().GetBGMTrack();
+        GameObject BGM = GameObject.FindFirstObjectByType<ToggleEffects>().GetBGMTrack();
 
         PlaySfx.PlayThenDestroy(enemyRespawnSFX, GameObject.FindGameObjectWithTag("Player").transform);
         EnemyAI enemyAI = Instantiate(enemyPrefab, transform).GetComponent<EnemyAI>();
         resetGame.SetNewEnemy(enemyAI);
         enemyAI.SetEnemyBGM(BGM);
-        GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyAI>().ResetEnemy();
+        GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyAI>().ResetEnemyPosition();
     }
 
     public void IncrementScore() {

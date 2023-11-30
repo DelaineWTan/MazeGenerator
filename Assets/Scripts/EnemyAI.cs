@@ -28,9 +28,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        // if (agent.remainingDistance == 0)
-            agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
-            // setRandomDestination();
+        agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
 
         if (agent.velocity == Vector3.zero)
             animator.Play(IdleAnimationName);
@@ -38,24 +36,27 @@ public class EnemyAI : MonoBehaviour
             animator.Play(RunAnimationName);
     }
 
-    private void setRandomDestination() 
+    public void ResetEnemyPosition()
     {
-        if (navMeshSurface.navMeshData != null)
+        int skipWidthStart = (maze.width * 2) / 5;
+        int skipWidthEnd = (maze.width * 3) / 5;
+
+        int skipHeightStart = (maze.height * 2) / 5;
+        int skipHeightEnd = (maze.height * 3) / 5;
+
+        int x;
+        int z;
+
+        // Keep generating new positions until it's not in the middle
+        do
         {
-            int x = rng.Next(maze.width);
-            int z = rng.Next(maze.height);
-            Vector3 randomDestination = new Vector3(x, 0, z);
-            agent.SetDestination(randomDestination);   
-        }
+            x = rng.Next(0, maze.width);
+            z = rng.Next(0, maze.height);
+        } while (x > skipWidthStart && x < skipWidthEnd && skipHeightStart < z && z < skipHeightEnd);
+
+        transform.position = new Vector3(x, 0, z);
     }
 
-    public void ResetEnemy()
-    {
-        int x = rng.Next(0, maze.width);
-        int z = rng.Next(0, maze.height);
-        transform.position = new Vector3(x, 0, z);
-        setRandomDestination();
-    }
 
     public int IncrementHitCount() {
         return ++hitCount;

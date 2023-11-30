@@ -31,7 +31,7 @@ public class ResetGame : MonoBehaviour
     {
         playerCamera.ResetCamera();
         playerMovement.ResetPlayerPosition();
-        enemyAI.ResetEnemy();
+        enemyAI.ResetEnemyPosition();
         exitTrigger.ResetExitTrigger();
     }
 

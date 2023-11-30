@@ -228,7 +228,7 @@ public class PongGameManager : MonoBehaviour
 
     // On click function for quitting out back to the maze game
     public void OnQuit() {
-        SceneManager.LoadScene("Jas");
+        SceneManager.LoadScene("Main");
     }
 
 }

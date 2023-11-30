@@ -177,7 +177,6 @@ public class MazeGenerator : MonoBehaviour
     }
 
     private void CreatePongDoor() {
-        Debug.Log("creating pong door");
         System.Random rng = new System.Random();
         int x = rng.Next(0, width);
         int y = rng.Next(0, height);
