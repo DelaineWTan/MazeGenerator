@@ -17,7 +17,6 @@ public class ExitTrigger : MonoBehaviour
         if (systemText != null)
             systemText.text = "";
         else
-            Debug.LogError("SystemText not found in the hierarchy.");
         // Find the Player object in the hierarchy
         playerTransform = GameObject.Find("Player").transform;
     }
@@ -41,7 +40,6 @@ public class ExitTrigger : MonoBehaviour
             if (distance <= triggerDistance)
             {
                 // The player has exited the maze.
-                Debug.Log("Player has exited the maze!");
 
                 // Display the "You Win" message
                 if (systemText != null)

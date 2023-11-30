@@ -97,7 +97,6 @@ public class PongGameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log( "Time up!" );
                 timeLeft = 0;
                 timerOn = false;
                 AnnounceWinner();
@@ -175,7 +174,6 @@ public class PongGameManager : MonoBehaviour
     public void OnStartGame()
     {
         isInGame = true;
-        Debug.Log( "Started Game" );
         this.m_MenuCanvas.enabled = false;
         timeLeft = DEFAULT_GAME_TIME_IN_SECONDS;
         timerOn = true;
@@ -208,7 +206,6 @@ public class PongGameManager : MonoBehaviour
         isInGame = true;
         m_Player2Script.enabled = true;
 
-        Debug.Log("Started PvP Game");
         this.m_MenuCanvas.enabled = false;
         OnStartGame();
     }
@@ -221,7 +218,6 @@ public class PongGameManager : MonoBehaviour
         isInGame = true;
         m_AiPaddle.enabled = true;
 
-        Debug.Log("Started PvAI Game");
         this.m_MenuCanvas.enabled = false;
         OnStartGame();
     }

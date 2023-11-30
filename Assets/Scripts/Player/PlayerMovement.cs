@@ -65,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
             PlaySfx.PlayThenDestroy(WallCollideSFX, transform);
         if (collision.gameObject.tag == "EnemyMesh" && !IsDead)

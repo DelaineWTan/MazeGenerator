@@ -75,7 +75,6 @@ public class Ball : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         ForceBounce();
-        Debug.Log("OnCollisionStay");
     }
 
     private void ForceBounce()
@@ -90,6 +89,5 @@ public class Ball : MonoBehaviour
             rb.velocity = lastFrameVelocity.normalized * speed;
         }
         m_Speed = speed;
-        Debug.Log("BALL SPEED SET!!!! BATCHEST: " + speed);
     }
 }
