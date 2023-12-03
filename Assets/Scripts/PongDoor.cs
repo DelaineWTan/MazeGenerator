@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PongDoor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         GameObject hit = collision.gameObject;
@@ -17,7 +10,8 @@ public class PongDoor : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             GameObject.FindFirstObjectByType<GameManager>().SaveData();
-            GameObject.FindFirstObjectByType<Camera>().gameObject.SetActive(false);
+            GameObject.Find("Player").gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GameObject.FindFirstObjectByType<MazeGenerator>().gameObject.SetActive(false);
             SceneManager.LoadScene("Pong");
         }
     }

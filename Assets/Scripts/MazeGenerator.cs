@@ -17,11 +17,19 @@ public class MazeGenerator : MonoBehaviour
 
     public Material pongDoorMat;
 
-    public static bool isLoaded = false;
+    public static MazeGenerator loadedGenerator = null;
+
+
+    private void OnEnable() {
+        if (loadedGenerator != null && this == loadedGenerator) {
+            GameObject.FindFirstObjectByType<ExitTrigger>().playerTransform = GameObject.Find("Player").transform;
+            loadedGenerator.surface.BuildNavMesh();
+        }
+    }
 
     private void Start()
     {
-        if (!isLoaded) {
+        if (loadedGenerator == null) {
             grid = new Cell[width, height];
             InitializeGrid();
             RecursiveBacktracking(0, 0);
@@ -29,11 +37,10 @@ public class MazeGenerator : MonoBehaviour
             CreateExit();
             CreatePongDoor();
             DontDestroyOnLoad(gameObject);
-            isLoaded = true;
+            loadedGenerator = this;
         } else {
-            GameObject.FindFirstObjectByType<Camera>(FindObjectsInactive.Include).gameObject.SetActive(true);
-            GameObject.FindFirstObjectByType<ExitTrigger>().playerTransform = GameObject.Find("Player").transform;
-            surface.BuildNavMesh();
+            loadedGenerator.transform.Find("GameManager").GetComponent<GameManager>().LoadSavedData();
+            loadedGenerator.gameObject.SetActive(true);
             Destroy(gameObject);
         }
     }

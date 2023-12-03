@@ -9,6 +9,7 @@ public class Cell : MonoBehaviour
     public GameObject wallDown;
     public GameObject wallLeft;
 
+
     // Enum for cell directions
     public enum Direction
     {

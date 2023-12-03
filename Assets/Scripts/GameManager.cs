@@ -18,9 +18,14 @@ public class GameManager : MonoBehaviour
     private string enemyPositionKey = "EnemyPosition";
     private string scoreKey = "Score";
 
+    private GameObject player;
+    private GameObject enemy;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     // Update is called once per frame
@@ -97,14 +102,16 @@ public class GameManager : MonoBehaviour
         float playerY = PlayerPrefs.GetFloat(playerPositionKey + "Y");
         float playerZ = PlayerPrefs.GetFloat(playerPositionKey + "Z");
 
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(playerX, playerY, playerZ);
+        // GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(playerX, playerY, playerZ);
 
+        player.transform.position = new Vector3(playerX, playerY, playerZ);
+        
         // Load enemy position
         float enemyX = PlayerPrefs.GetFloat(enemyPositionKey + "X");
         float enemyY = PlayerPrefs.GetFloat(enemyPositionKey + "Y");
         float enemyZ = PlayerPrefs.GetFloat(enemyPositionKey + "Z");
 
-        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+        // GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
         if (enemy != null)
         {
             enemy.transform.position = new Vector3(enemyX, enemyY, enemyZ);

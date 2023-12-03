@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/JasOld.unity
     guid: 750b0da14e7b8d345bcd6be345fa4c4c
   - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 9576415b116043f4ca9ba5651dd01d57
+  - enabled: 1
     path: Assets/Scenes/Pong.unity
     guid: a2f740e7c403c7e4aa4bef52ce14bb74
-  - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 226a9ab23ad1e534e84b86aa22042b18
   m_configObjects: {}
